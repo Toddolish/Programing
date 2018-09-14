@@ -8,6 +8,12 @@ TagManager:
   - BrightSlkider
   - Bslide
   - Aslide
+  - CheckPoint
+  - pased
+  - Paused
+  - NPC
+  - CHEST
+  - ITEM
   layers:
   - Default
   - TransparentFX

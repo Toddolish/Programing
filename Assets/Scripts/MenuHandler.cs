@@ -55,7 +55,7 @@ public class MenuHandler : MonoBehaviour {
     }
     public void LoadGame()
     {
-        SceneManager.LoadScene("Level");
+        SceneManager.LoadScene(1);
     }
     public void ExitGame()
     {
@@ -144,6 +144,16 @@ public class MenuHandler : MonoBehaviour {
             holdingKey = forward;
             forward = KeyCode.None;
             forwardText.text = forward.ToString();
+        }
+    }
+    public void Backward()
+    {
+        if (!(forward == KeyCode.None || left == KeyCode.None || right == KeyCode.None || jump == KeyCode.None || sprint == KeyCode.None
+                || crouch == KeyCode.None || interact == KeyCode.None))
+        {
+            holdingKey = backward;
+            backward = KeyCode.None;
+            backwardText.text = backward.ToString();
         }
     }
 }

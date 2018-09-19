@@ -30,18 +30,25 @@ public class CustomisationSet : MonoBehaviour {
     public string charName = "Adventurer";
     //base stats that will better our character
     [Header("Stats")]
-    public int str;
-    public int dex, chr, con, intel, wis;
+    //base stats for player
+    public string[] statArray = new string[6];
+    public int[] stats = new int[6];
+    public int[] tempStats = new int[6];
+
     //points in which we use to increase our stats
     public int points = 10;
     public CharacterClass charClass = CharacterClass.Barbarian;
+    public string[] selectedClass = new string[8];
+    public int selectedIndex = 0;
     #endregion
     public bool showDropdown;
     public Vector2 scrollPos;
-    public Vector2[] res;
+   
     #region Start
     private void Start() //in start we need to set up the following
     {
+        statArray = new string[] { "strength", "Dexterity", "Constitution", "Wisdom", "Intelligence", "Charisma" };
+        selectedClass = new string[] { "Barbarian", "Bard", "Druid", "Monk", "Paladin", "Ranger", "Sorcerer", "Warlock" };
         #region for loop to pull textures from file
         //for loop looping from 0 to less than the max amount of skin textures we need
         for (int i = 0; i < skinMaxIndex; i++)
@@ -105,6 +112,14 @@ public class CustomisationSet : MonoBehaviour {
         SetTexture("Clothes", 0);
         SetTexture("Armour", 0);
         #endregion
+        character = GameObject.Find("Mesh").GetComponent<SkinnedMeshRenderer>();
+        SetTexture("Skin", 0);
+        SetTexture("Hair", 0);
+        SetTexture("Mouth", 0);
+        SetTexture("Eyes", 0);
+        SetTexture("Clothes", 0);
+        SetTexture("Armour", 0);
+        ChooseClass(selectedIndex);
     }
     #endregion
 
@@ -288,7 +303,8 @@ public class CustomisationSet : MonoBehaviour {
         PlayerPrefs.SetString("CharacterName", charName);
     }
     #endregion
-
+    // point in which we use increase our stats
+    public int point = 10;
     #region OnGUI
     private void OnGUI()//Function for our GUI elements
     {
@@ -463,63 +479,147 @@ public class CustomisationSet : MonoBehaviour {
         {
             //our scroll position is equal to our posision in our scroll view
             //start on GUI elements in scroll view
-            scrollPos = GUI.BeginScrollView(new Rect(11.6f * scrW, 3f * scrH, 3f * scrW, 3f * scrH), scrollPos, new Rect(0, 0, 2 * scrW, 3.5f * scrH), false, true);
-            for (int c = 0; c < res.Length; c++)// for all the options
+            if (selectedClass.Length <= 6)
+            {
+                scrollPos = GUI.BeginScrollView(new Rect(11.6f * scrW, 3f * scrH, 3f * scrW, 3f * scrH), scrollPos, new Rect(0, 0, 2 * scrW, 3f * scrH), false, true);
+            }
+            else
+            {
+                scrollPos = GUI.BeginScrollView(new Rect(11.6f * scrW, 3f * scrH, 3f * scrW, 3f * scrH), scrollPos, new Rect(0, 0, 2 * scrW, 3f * scrH + ((selectedClass.Length - 6) * (scrH * 0.5f))), false, true);
+            }
+            for (int c = 0; c < selectedClass.Length; c++)// for all the options
             {
                 //create a button in top of scroll view
-                //if(GUI.Button(new Rect(0,0,1f * scrW,0.5f * scrH),"Barbarian") res[c].x + res[c].y)
-                //{
-
-                //}
+                if(GUI.Button(new Rect(0,0+c*(scrH*0.5f),3f * scrW,0.5f * scrH), selectedClass[c]))
+                {
+                    selectedIndex = c;
+                    ChooseClass(selectedIndex);
+                }
             }
             //end gui elements inside scroll view
             GUI.EndScrollView();
         }
-        #endregion
         #region Classes
-        switch (charClass)
+      
+
+        GUI.Box(new Rect(3.75f * scrW, 2f * scrH, 2f * scrW, 0.5f * scrH), "Points: " + points);
+        for (int s = 0; s < 6; s++)
+        {
+            if (points > 0)
+            {
+                if (GUI.Button(new Rect(5.75f * scrW, 2.5f * scrH + s * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "+"))
+                {
+                    points--;
+                    tempStats[s]++;
+                }
+            }
+
+            GUI.Box(new Rect(3.75f * scrW, 2.5f * scrH + s *(0.5f * scrH), 2f * scrW, 0.5f * scrH), statArray[s] + ": " + (stats[s] + tempStats[s]));
+            if (points < 10 && tempStats[s] > 0)
+            {
+                if (GUI.Button(new Rect(3.25f * scrW, 2.5f * scrH + s * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "-"))
+                {
+                    points++;
+                    tempStats[s]--;
+                }
+            }
+        }
+        #endregion
+        #endregion
+
+    }
+    void ChooseClass(int className)
+    {
+        switch (className)
         {
             //Barbarian
-            case CharacterClass.Barbarian:
-
+            case 0:
+                stats[0] = 15;
+                stats[1] = 10;
+                stats[2] = 10;
+                stats[3] = 10;
+                stats[4] = 10;
+                stats[5] = 5;
+                charClass = CharacterClass.Barbarian;
                 break;
 
             //Bard
-            case CharacterClass.Bard:
-
+            case 1:
+                stats[0] = 5;
+                stats[1] = 10;
+                stats[2] = 10;
+                stats[3] = 10;
+                stats[4] = 10;
+                stats[5] = 15;
+                charClass = CharacterClass.Bard;
                 break;
 
             //Druid
-            case CharacterClass.Druid:
-
+            case 2:
+                stats[0] = 10;
+                stats[1] = 10;
+                stats[2] = 10;
+                stats[3] = 10;
+                stats[4] = 10;
+                stats[5] = 10;
+                charClass = CharacterClass.Druid;
                 break;
 
             //Monk
-            case CharacterClass.Monk:
-
+            case 3:
+                stats[0] = 5;
+                stats[1] = 15;
+                stats[2] = 15;
+                stats[3] = 10;
+                stats[4] = 10;
+                stats[5] = 5;
+                charClass = CharacterClass.Monk;
                 break;
 
             //Paladin
-            case CharacterClass.Paladin:
-
+            case 4:
+                stats[0] = 15;
+                stats[1] = 10;
+                stats[2] = 15;
+                stats[3] = 5;
+                stats[4] = 5;
+                stats[5] = 10;
+                charClass = CharacterClass.Paladin;
                 break;
 
             //Ranger
-            case CharacterClass.Ranger:
-
+            case 5:
+                stats[0] = 5;
+                stats[1] = 15;
+                stats[2] = 10;
+                stats[3] = 15;
+                stats[4] = 10;
+                stats[5] = 5;
+                charClass = CharacterClass.Ranger;
                 break;
 
             //Sorcerer
-            case CharacterClass.Sorcerer:
-
+            case 6:
+                stats[0] = 10;
+                stats[1] = 10;
+                stats[2] = 10;
+                stats[3] = 15;
+                stats[4] = 10;
+                stats[5] = 5;
+                charClass = CharacterClass.Sorcerer;
                 break;
 
             //Warlock
-            case CharacterClass.Warlock:
-
+            case 7:
+                stats[0] = 5;
+                stats[1] = 5;
+                stats[2] = 5;
+                stats[3] = 15;
+                stats[4] = 15;
+                stats[5] = 15;
+                charClass = CharacterClass.Warlock;
                 break;
         }
-        #endregion
     }
     #endregion
 }

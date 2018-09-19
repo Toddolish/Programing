@@ -39,6 +39,7 @@ public class CustomisationSet : MonoBehaviour {
     public int points = 10;
     public CharacterClass charClass = CharacterClass.Barbarian;
     public string[] selectedClass = new string[8];
+    public string button = "Choose Class";
     public int selectedIndex = 0;
     #endregion
     public bool showDropdown;
@@ -47,7 +48,7 @@ public class CustomisationSet : MonoBehaviour {
     #region Start
     private void Start() //in start we need to set up the following
     {
-        statArray = new string[] { "strength", "Dexterity", "Constitution", "Wisdom", "Intelligence", "Charisma" };
+        statArray = new string[] { "Strength", "Dexterity", "Constitution", "Wisdom", "Intelligence", "Charisma" };
         selectedClass = new string[] { "Barbarian", "Bard", "Druid", "Monk", "Paladin", "Ranger", "Sorcerer", "Warlock" };
         #region for loop to pull textures from file
         //for loop looping from 0 to less than the max amount of skin textures we need
@@ -301,6 +302,15 @@ public class CustomisationSet : MonoBehaviour {
 
         //SetString CharacterName
         PlayerPrefs.SetString("CharacterName", charName);
+
+        //Set player stats
+        /*
+        PlayerPrefs.SetString("Strength", tempStats[]);
+        PlayerPrefs.SetString("Dexterity", stats[]);
+        PlayerPrefs.SetString("Constitution", stats[]);
+        PlayerPrefs.SetString("Wisdom", stats[]);
+        PlayerPrefs.SetString("Intelligence", stats[]);
+        PlayerPrefs.SetString("Charisma", stats[]);*/
     }
     #endregion
     // point in which we use increase our stats
@@ -457,7 +467,7 @@ public class CustomisationSet : MonoBehaviour {
         #region Character Name and Save & Play
         //name of our character equals a GUI TextField that holds our character name and limit of characters
         charName = GUI.TextField(new Rect(0.10f * scrW, scrH + i * (2.05f * scrH), 2f * scrW, 0.5f * scrH), charName, 16);
-        if (GUI.Button(new Rect(0.05f * scrW, scrH + i * (2.30f * scrH), 2f * scrW, 0.5f * scrH), "Save & Play"))
+        if (GUI.Button(new Rect(0.05f * scrW, scrH + i * (2.30f * scrH), 2f * scrW, 0.5f * scrH), "Save & Play") && points == 0)
         {
             Save();
             SceneManager.LoadScene(2);
@@ -471,7 +481,7 @@ public class CustomisationSet : MonoBehaviour {
         }
         #endregion
         #region Stats
-        if (GUI.Button(new Rect(11.6f * scrW, 2f * scrH, 2f * scrW, 0.5f * scrH), "Class"))
+        if (GUI.Button(new Rect(11.6f * scrW, 2f * scrH, 2f * scrW, 0.5f * scrH), button))
         {
             showDropdown = !showDropdown;
         }
@@ -481,7 +491,7 @@ public class CustomisationSet : MonoBehaviour {
             //start on GUI elements in scroll view
             if (selectedClass.Length <= 6)
             {
-                scrollPos = GUI.BeginScrollView(new Rect(11.6f * scrW, 3f * scrH, 3f * scrW, 3f * scrH), scrollPos, new Rect(0, 0, 2 * scrW, 3f * scrH), false, true);
+                scrollPos = GUI.BeginScrollView(new Rect(11.6f * scrW, 3f * scrH, 3f * scrW, 3f * scrH), scrollPos, new Rect(0, 0, 2 * scrW, 3f * scrH), false, false);
             }
             else
             {
@@ -494,14 +504,14 @@ public class CustomisationSet : MonoBehaviour {
                 {
                     selectedIndex = c;
                     ChooseClass(selectedIndex);
+                    button = selectedClass[c];
+                    showDropdown = !showDropdown;
                 }
             }
             //end gui elements inside scroll view
             GUI.EndScrollView();
         }
         #region Classes
-      
-
         GUI.Box(new Rect(3.75f * scrW, 2f * scrH, 2f * scrW, 0.5f * scrH), "Points: " + points);
         for (int s = 0; s < 6; s++)
         {

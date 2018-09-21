@@ -830,7 +830,23 @@ Prefab:
       propertyPath: m_Name
       value: PlayerCustom
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114792264028918308, guid: 4e3ed1749d4a4054889960e112f34722,
+        type: 2}
+      propertyPath: hairMaxIndex
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114792264028918308, guid: 4e3ed1749d4a4054889960e112f34722,
+        type: 2}
+      propertyPath: mouthMaxIndex
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114792264028918308, guid: 4e3ed1749d4a4054889960e112f34722,
+        type: 2}
+      propertyPath: clothesMaxIndex
+      value: 12
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114130417046625072, guid: 4e3ed1749d4a4054889960e112f34722, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 4e3ed1749d4a4054889960e112f34722, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1857634807

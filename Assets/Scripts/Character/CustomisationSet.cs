@@ -7,7 +7,7 @@ public class CustomisationSet : MonoBehaviour {
 
     #region Variables
     [Header("Texture List")]
-    //Texture2D List for skin,hair, mouth, eyes
+    // Texture2D List for skin,hair, mouth, eyes
     public List<Texture2D> skin = new List<Texture2D>();
     public List<Texture2D> hair = new List<Texture2D>();
     public List<Texture2D> mouth = new List<Texture2D>();
@@ -15,27 +15,27 @@ public class CustomisationSet : MonoBehaviour {
     public List<Texture2D> clothes = new List<Texture2D>();
     public List<Texture2D> armour = new List<Texture2D>();
     [Header("Index")]
-    //index numbers for our current skin, hair, mouth, eyes textures
+    // index numbers for our current skin, hair, mouth, eyes textures
     public int skinIndex;
     public int hairIndex, mouthIndex, eyesIndex, clothesIndex, armourIndex;
     [Header("Renderer")]
-    //renderer for our character mesh so we can reference a material list
+    // renderer for our character mesh so we can reference a material list
     public Renderer character;
     [Header("Max Index")]
-    //max amount of skin, hair, mouth, eyes textures that our lists are filling with
+    // max amount of skin, hair, mouth, eyes textures that our lists are filling with
     public int skinMaxIndex;
     public int hairMaxIndex, mouthMaxIndex, eyesMaxIndex, clothesMaxIndex, armourMaxIndex;
     [Header("Character Name")]
-    //name of our character that the user is making
+    // name of our character that the user is making
     public string charName = "Adventurer";
-    //base stats that will better our character
+    // base stats that will better our character
     [Header("Stats")]
-    //base stats for player
+    // base stats for player
     public string[] statArray = new string[6];
     public int[] stats = new int[6];
     public int[] tempStats = new int[6];
 
-    //points in which we use to increase our stats
+    // points in which we use to increase our stats
     public int points = 10;
     public CharacterClass charClass = CharacterClass.Barbarian;
     public string[] selectedClass = new string[8];
@@ -46,7 +46,7 @@ public class CustomisationSet : MonoBehaviour {
     public Vector2 scrollPos;
    
     #region Start
-    private void Start() //in start we need to set up the following
+    private void Start() // in start we need to set up the following
     {
         statArray = new string[] { "Strength", "Dexterity", "Constitution", "Wisdom", "Intelligence", "Charisma" };
         selectedClass = new string[] { "Barbarian", "Bard", "Druid", "Monk", "Paladin", "Ranger", "Sorcerer", "Warlock" };
@@ -101,7 +101,7 @@ public class CustomisationSet : MonoBehaviour {
         }
         #endregion
 
-        //connect and find the SkinnedMeshRenderer thats in the scene to the variable we made for Renderer
+        // connect and find the SkinnedMeshRenderer thats in the scene to the variable we made for Renderer
         character = GameObject.Find("Mesh").GetComponent<SkinnedMeshRenderer>();
 
         #region do this after making the function SetTexture
@@ -290,9 +290,9 @@ public class CustomisationSet : MonoBehaviour {
     #endregion
 
     #region Save
-    void Save() //Function called Save this will allow us to save our indexes to PlayerPrefs
+    void Save() // Function called Save this will allow us to save our indexes to PlayerPrefs
     {
-        //SetInt for SkinIndex, HairIndex, MouthIndex, EyesIndex, ClothesIndex, ArmourIndex
+        // SetInt for SkinIndex, HairIndex, MouthIndex, EyesIndex, ClothesIndex, ArmourIndex
         PlayerPrefs.SetInt("SkinIndex", skinIndex);
         PlayerPrefs.SetInt("HairIndex", hairIndex);
         PlayerPrefs.SetInt("MouthIndex", mouthIndex);
@@ -300,28 +300,27 @@ public class CustomisationSet : MonoBehaviour {
         PlayerPrefs.SetInt("ClothesIndex", clothesIndex);
         PlayerPrefs.SetInt("ArmourIndex", armourIndex);
 
-        //SetString CharacterName
+        // SetString CharacterName
         PlayerPrefs.SetString("CharacterName", charName);
 
-        //Set player stats
-        /*
-        PlayerPrefs.SetString("Strength", tempStats[]);
-        PlayerPrefs.SetString("Dexterity", stats[]);
-        PlayerPrefs.SetString("Constitution", stats[]);
-        PlayerPrefs.SetString("Wisdom", stats[]);
-        PlayerPrefs.SetString("Intelligence", stats[]);
-        PlayerPrefs.SetString("Charisma", stats[]);*/
+        // Set player stats
+        for (int i = 0; i < stats.Length; i++)
+        {
+            PlayerPrefs.SetInt(statArray[i], stats[i]);
+        }
+        PlayerPrefs.SetString("CharacterClass", selectedClass[selectedIndex]);
     }
     #endregion
+    #region OnGUI
+
     // point in which we use increase our stats
     public int point = 10;
-    #region OnGUI
-    private void OnGUI()//Function for our GUI elements
+    private void OnGUI()// Function for our GUI elements
     {
-        //create the floats scrW and scrH that govern our 16:9 ratio
+        // create the floats scrW and scrH that govern our 16:9 ratio
         float scrW = Screen.width/16;
         float scrH = Screen.height/9;
-        //create an int that will help with shuffling your GUI elements under eachother
+        // create an int that will help with shuffling your GUI elements under eachother
         int i = 1;
         #region Skin
         //GUI button on the left of the screen with the contence <
@@ -439,10 +438,10 @@ public class CustomisationSet : MonoBehaviour {
         }
         #endregion
         #region Random Reset
-        //create 2 buttons one Random and one Reset
+        // create 2 buttons one Random and one Reset
         if (GUI.Button(new Rect(0.20f * scrW, scrH + i * (2.05f * scrH), 1.05f * scrW, 0.5f * scrH), "Random"))
         {
-            //Random will feed a random amount to the direction 
+            // Random will feed a random amount to the direction 
             SetTexture("Skin",Random.Range(0, skinMaxIndex - 1));
             SetTexture("Mouth", Random.Range(0, mouthMaxIndex - 1));
             SetTexture("Hair", Random.Range(0, hairMaxIndex - 1));
@@ -451,7 +450,7 @@ public class CustomisationSet : MonoBehaviour {
             SetTexture("Armour", Random.Range(0, armourMaxIndex - 1));
 
         }
-        //reset will set all to 0 both use SetTexture
+        // reset will set all to 0 both use SetTexture
         if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (2.05f * scrH), 1.1f * scrW, 0.5f * scrH), "Reset"))
         {
             SetTexture("Skin", skinIndex = 0);

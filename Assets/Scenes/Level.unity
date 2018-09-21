@@ -1749,12 +1749,12 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: ee1918ed6f09baa409abe184c111ee07, type: 2}
-  - {fileID: 2100000, guid: 6097dcafbea0f8d43bed9c4c166b8780, type: 2}
-  - {fileID: 2100000, guid: d113a2d9b94b43d4c9294fd477537532, type: 2}
-  - {fileID: 2100000, guid: b4b029d1397fb314d90f3b0e8ca07889, type: 2}
+  - {fileID: 2100000, guid: 123e3733dd86b4b459ee4c3da156c98a, type: 2}
   - {fileID: 2100000, guid: 3068e0c6d90df0f42b0121bd211561a5, type: 2}
-  - {fileID: 2100000, guid: ee1918ed6f09baa409abe184c111ee07, type: 2}
-  - {fileID: 2100000, guid: ee1918ed6f09baa409abe184c111ee07, type: 2}
+  - {fileID: 2100000, guid: 85bd0e43d5733fc42a3b34ced4310d59, type: 2}
+  - {fileID: 2100000, guid: b4b029d1397fb314d90f3b0e8ca07889, type: 2}
+  - {fileID: 2100000, guid: d113a2d9b94b43d4c9294fd477537532, type: 2}
+  - {fileID: 2100000, guid: 6097dcafbea0f8d43bed9c4c166b8780, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2865,6 +2865,7 @@ GameObject:
   - component: {fileID: 1005560123}
   - component: {fileID: 1005560122}
   - component: {fileID: 1005560121}
+  - component: {fileID: 1005560128}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3220,6 +3221,19 @@ CapsuleCollider:
   m_Height: 2.4769073
   m_Direction: 1
   m_Center: {x: 0, y: 1.2022812, z: 0}
+--- !u!114 &1005560128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1005560119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ab7a4d70ae9924c809b00c5e471c82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charMesh: {fileID: 0}
+  charH: {fileID: 1005560122}
 --- !u!1 &1039344860
 GameObject:
   m_ObjectHideFlags: 0
@@ -3510,7 +3524,7 @@ GameObject:
   - component: {fileID: 1207829942}
   - component: {fileID: 1207829941}
   m_Layer: 0
-  m_Name: Mesh
+  m_Name: NPCMesh
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

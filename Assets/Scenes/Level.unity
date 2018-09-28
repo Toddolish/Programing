@@ -1891,6 +1891,7 @@ GameObject:
   - component: {fileID: 578890309}
   - component: {fileID: 578890308}
   - component: {fileID: 578890311}
+  - component: {fileID: 578890312}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1979,6 +1980,18 @@ MonoBehaviour:
   maximumY: 40
   Player: {fileID: 0}
   pauseMenu: {fileID: 0}
+--- !u!114 &578890312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 578890307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 1649116e53669f447bd451dd2713f40a, type: 2}
 --- !u!1 &660829868
 GameObject:
   m_ObjectHideFlags: 0
@@ -3349,6 +3362,17 @@ MonoBehaviour:
   maxEXP: 0
   curEXP: 20
   miniMap: {fileID: 0}
+  showStatWindow: 0
+  scrollPos: {x: 0, y: 0}
+  points: 3
+  statArray:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  tempStats: 000000000000000000000000000000000000000000000000
 --- !u!114 &1005560123
 MonoBehaviour:
   m_ObjectHideFlags: 0

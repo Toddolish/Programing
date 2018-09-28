@@ -36,7 +36,7 @@ public class CustomisationSet : MonoBehaviour {
     public int[] tempStats = new int[6];
 
     // points in which we use to increase our stats
-    public int points = 10;
+    public int points = 3;
     public CharacterClass charClass = CharacterClass.Barbarian;
     public string[] selectedClass = new string[8];
     public string button = "Choose Class";
@@ -290,7 +290,7 @@ public class CustomisationSet : MonoBehaviour {
     #endregion
 
     #region Save
-    void Save() // Function called Save this will allow us to save our indexes to PlayerPrefs
+    public void Save() // Function called Save this will allow us to save our indexes to PlayerPrefs
     {
         // SetInt for SkinIndex, HairIndex, MouthIndex, EyesIndex, ClothesIndex, ArmourIndex
         PlayerPrefs.SetInt("SkinIndex", skinIndex);
@@ -306,7 +306,7 @@ public class CustomisationSet : MonoBehaviour {
         // Set player stats
         for (int i = 0; i < stats.Length; i++)
         {
-            PlayerPrefs.SetInt(statArray[i], stats[i]);
+            PlayerPrefs.SetInt(statArray[i], (stats[i] + tempStats[i]));
         }
         PlayerPrefs.SetString("CharacterClass", selectedClass[selectedIndex]);
     }

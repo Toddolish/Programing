@@ -5,31 +5,16 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     #region Variables
-    public List<Item> inv = new List<Item>();//list of items
+    public static List<Item> inv = new List<Item>();//list of items
     public static bool showInv;//show or hide inventory
     public Item selectedItem;//the item we are interacting with
-    public int money;//how much moolah we have
+    public static int money;//how much moolah we have
 
     public Vector2 scr = Vector2.zero;//16:9
     public Vector2 scrollPos = Vector2.zero;//scroll bar position
 
     public string sortType = "All";
     #endregion
-    void Start()
-    {
-        inv.Add(ItemData.CreateItem(0));
-        inv.Add(ItemData.CreateItem(2));
-        inv.Add(ItemData.CreateItem(102));
-        inv.Add(ItemData.CreateItem(201));
-        inv.Add(ItemData.CreateItem(202));
-        inv.Add(ItemData.CreateItem(302));
-        inv.Add(ItemData.CreateItem(404));
-
-        for (int i = 0; i < inv.Count; i++)
-        {
-            Debug.Log(inv[i].Name);
-        }
-    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -85,32 +70,32 @@ public class Inventory : MonoBehaviour
                     scr.x = Screen.width / 16;
                     scr.y = Screen.height / 9;
                 }
-                GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "Iventory");
-                if (GUI.Button(new Rect(5.5f * scr.x, 0.25f * scr.y, scr.x, 0.25f * scr.y), "All"))
+                GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "Inventory");
+                if (GUI.Button(new Rect(5.5f * scr.x, 2.5f * scr.y, scr.x, 0.25f * scr.y), "All"))
                 {
                     sortType = "All";
                 }
-                if (GUI.Button(new Rect(6.5f * scr.x, 0.25f * scr.y, scr.x, 0.25f * scr.y), "Consumables"))
+                if (GUI.Button(new Rect(6.5f * scr.x, 2.5f * scr.y, scr.x, 0.25f * scr.y), "Consumables"))
                 {
                     sortType = "Consumables";
                 }
-                if (GUI.Button(new Rect(7.5f * scr.x, 0.25f * scr.y, scr.x, 0.25f * scr.y), "Craftables"))
+                if (GUI.Button(new Rect(7.5f * scr.x, 2.5f * scr.y, scr.x, 0.25f * scr.y), "Craftables"))
                 {
                     sortType = "Craftable";
                 }
-                if (GUI.Button(new Rect(8.5f * scr.x, 0.25f * scr.y, scr.x, 0.25f * scr.y), "Weapons"))
+                if (GUI.Button(new Rect(8.5f * scr.x, 2.5f * scr.y, scr.x, 0.25f * scr.y), "Weapons"))
                 {
                     sortType = "Weapon";
                 }
-                if (GUI.Button(new Rect(9.5f * scr.x, 0.25f * scr.y, scr.x, 0.25f * scr.y), "Armour"))
+                if (GUI.Button(new Rect(9.5f * scr.x, 2.5f * scr.y, scr.x, 0.25f * scr.y), "Armour"))
                 {
                     sortType = "Armour";
                 }
-                if (GUI.Button(new Rect(10.5f * scr.x, 0.25f * scr.y, scr.x, 0.25f * scr.y), "Misc"))
+                if (GUI.Button(new Rect(10.5f * scr.x, 2.5f * scr.y, scr.x, 0.25f * scr.y), "Misc"))
                 {
                     sortType = "Misc";
                 }
-                if (GUI.Button(new Rect(11.5f * scr.x, 0.25f * scr.y, scr.x, 0.25f * scr.y), "Quest"))
+                if (GUI.Button(new Rect(11.5f * scr.x, 2.5f * scr.y, scr.x, 0.25f * scr.y), "Quest"))
                 {
                     sortType = "Quest";
                 }
@@ -140,8 +125,15 @@ public class Inventory : MonoBehaviour
                             if (GUI.Button(new Rect(15 * scr.x, 8.75f * scr.y, scr.x, 0.25f * scr.y), "Eat"))
                             {
                                 //CharacterHandler.curHealth += selectedItem.Heal;
-                                inv.Remove(selectedItem);
-                                selectedItem = null;
+                                if(selectedItem.Amount > 1)
+                                {
+                                    selectedItem.Amount--;
+                                }
+                                else
+                                {
+                                    inv.Remove(selectedItem);
+                                    selectedItem = null;
+                                }
                                 return;
                             }
                             break;

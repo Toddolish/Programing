@@ -40,7 +40,7 @@ public class MouseLook : MonoBehaviour
     #region Update
     void Update()
     {
-        if (!pauseMenu.paused)
+        if (Time.timeScale == 1)
         {
             switch (axis)
             {

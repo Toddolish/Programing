@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 39cace2863926444a9a78daa8ae26413, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -222,7 +222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a96c67ffd707017499f189fd7d26971d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paused: 0
   pauseMenu: {fileID: 78382157}
   charHandler: {fileID: 0}
   optionsMenu: {fileID: 1084070457}
@@ -2951,6 +2950,7 @@ GameObject:
   - component: {fileID: 1005560122}
   - component: {fileID: 1005560121}
   - component: {fileID: 1005560128}
+  - component: {fileID: 1005560129}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3467,6 +3467,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charMesh: {fileID: 0}
   charH: {fileID: 1005560122}
+--- !u!114 &1005560129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1005560119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2a33a5a1fa6cc4ea73f73fc0ae1568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 0
+  scr: {x: 0, y: 0}
+  scrollPos: {x: 0, y: 0}
+  sortType: All
 --- !u!1 &1039344860
 GameObject:
   m_ObjectHideFlags: 0
@@ -4575,7 +4590,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh28680
+  m_Name: pb_Mesh6162
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2

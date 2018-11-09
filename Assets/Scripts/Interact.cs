@@ -63,7 +63,7 @@ public class Interact : MonoBehaviour
                 #region ITEM
                 if (hitInfo.collider.CompareTag("ITEM"))
                 {
-                    Debug.Log("GET ITEM");
+                    Debug.Log("GET ITEM ");
                     ItemHandler handler = hitInfo.transform.GetComponent<ItemHandler>();
                     if(handler != null)
                     {

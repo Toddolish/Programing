@@ -17,12 +17,7 @@ public class Item
 
     public Item()
     {
-        _id = 0;
-        _name = "unknown";
-        _description = "???";
-        _value = 0;
-        _mesh = "MeshName";
-        _type = ItemTypes.Quest;
+       
     }
     public Item(int id, string name, int value, string description, ItemTypes type, string meshName)
     {

@@ -14,6 +14,14 @@ public class Inventory : MonoBehaviour
     public Vector2 scrollPos = Vector2.zero;//scroll bar position
 
     public string sortType = "All";
+
+    public Transform dropLocation;
+    public Transform[] equippedLocation;
+
+    public GameObject curWeapon;
+    public GameObject curHelm;
+    //0 = Right Hand //Weapon
+    //1 = Head // Helmet
     #endregion
     void Update()
     {
@@ -111,8 +119,16 @@ public class Inventory : MonoBehaviour
                         if (GUI.Button(new Rect(14 * scr.x, 8.75f * scr.y, scr.x, 0.25f * scr.y), "Discard"))
                         {
                             //spawn item on ground
-                            inv.Remove(selectedItem);
-                            selectedItem = null;
+                            Instantiate(Resources.Load("Prefabs/" + selectedItem.MeshName) as GameObject, dropLocation.position, dropLocation.rotation); ;
+                            if(selectedItem.Amount > 1)
+                            {
+                                selectedItem.Amount--;
+                            }
+                            else
+                            {
+                                inv.Remove(selectedItem);
+                                selectedItem = null;
+                            }
                             return;
                         }
                     }
@@ -153,9 +169,20 @@ public class Inventory : MonoBehaviour
                             break;
                         case ItemTypes.Weapon:
                             GUI.Box(new Rect(8 * scr.x, 5 * scr.y, 8 * scr.x, 3 * scr.y), selectedItem.Name + "\n" + selectedItem.Description + "\nValue: " + selectedItem.Value + "\nDamage: " + selectedItem.Damage);
-                            if (GUI.Button(new Rect(15 * scr.x, 8.75f * scr.y, scr.x, 0.25f * scr.y), "Equip"))
+                            if (curWeapon == null || selectedItem.MeshName != curWeapon.name)
                             {
-                                //use and spawn to character
+                                if (GUI.Button(new Rect(15 * scr.x, 8.75f * scr.y, scr.x, 0.25f * scr.y), "Equip"))
+                                {
+                                    //use and spawn to character
+                                    if (curWeapon != null)
+                                    {
+                                        Destroy(curWeapon);
+                                    }
+                                    curWeapon = Instantiate(Resources.Load("Prefabs/" + selectedItem.MeshName) as GameObject, equippedLocation[0]);
+
+                                    curWeapon.GetComponent<ItemHandler>().enabled = false;
+                                    curWeapon.name = selectedItem.MeshName;
+                                }
                             }
                             break;
                         case ItemTypes.Misc:

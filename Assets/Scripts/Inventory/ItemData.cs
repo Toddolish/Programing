@@ -29,7 +29,7 @@ public static class ItemData
                 amount = 1;
                 heal = 10;
                 icon = "Apple_Icon";
-                mesh = "";
+                mesh = "Apple_Mesh";
                 type = ItemTypes.Consumables;
                 break;
 
